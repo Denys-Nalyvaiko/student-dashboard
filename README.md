@@ -46,6 +46,10 @@ To install and run Student Dashboard project using Dokcer Compose, you need to h
 - To-do List: User can create short tasks with a specific deadline.
 - Calendar: The dashboard can sync with user cources and assignments to keep users informed about activities, deadlines, exams and other important dates.
 
+## Configuration
+
+To configure the Student Dashboard project you need to define the services, environment variables, volumes and any other necessary configuration in a `docker-compose.yml` file.
+
 ## Contributing
 
 Welcome contributions to improve this student dashboard. If you'd like to contribute, please follow these steps:

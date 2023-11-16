@@ -1,64 +1,71 @@
 <?php
-require_once 'php/db.php';
-
 session_start();
+require_once 'php/User.php';
+require_once 'php/Databse.php';
 
-// Generate salt
+$db = new Database();
+
 function generateSalt($length = 32) {
     return bin2hex(random_bytes($length));
 }
 
-// Hash password
 function hashPassword($password, $salt) {
     return hash('sha512', $password . $salt);
 }
 
-// Connect with Data Base
-$db = new Database();
-
-// Login user
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
-    $username = $_POST['username'];
+    $loginInput = $_POST['loginInput'];
     $password = $_POST['password'];
 
-    $user = $db->getUserByUsername($username);
-
-    if ($user && hashPassword($password, $user['salt']) === $user['password_hash']) {
-        $_SESSION['user_id'] = $user['id'];
-        echo "Login success!";
+    if (filter_var($loginInput, FILTER_VALIDATE_EMAIL)) {
+        $user = $db->getUserByEmail($loginInput);
     } else {
-        echo "Login error";
+        $user = $db->getUserByUsername($loginInput);
+    }
+
+    if ($user && hashPassword($password, $user->salt) === $user->password_hash) {
+        $_SESSION['user_id'] = $user->id;
+        echo "Zalogowano pomyślnie!";
+    } else {
+        echo "Błąd logowania.";
     }
 }
 
-// Register new user
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     $username = $_POST['username'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
+    $role = 'User';
 
-    $salt = generateSalt();
-    $hashedPassword = hashPassword($password, $salt);
-
-    if ($db->createUser($username, $hashedPassword, $salt)) {
-        echo "Register success!";
+    if ($db->getUserByUsername($username) || $db->getUserByEmail($email)) {
+        echo "Użytkownik o podanej nazwie użytkownika lub emailu już istnieje.";
     } else {
-        echo "Register error";
+        $salt = generateSalt();
+        $hashedPassword = hashPassword($password, $salt);
+
+        if ($db->createUserWithRole($username, $email, $hashedPassword, $salt, $role)) {
+            echo "Rejestracja pomyślna!";
+        } else {
+            echo "Błąd rejestracji.";
+        }
     }
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Register</title>
 </head>
 <body>
+
     <h1>Login</h1>
-    <form method="post">
-        <label for="username">Username:</label>
-        <input type="text" name="username" required>
+    <form method="post" action="index.php">
+        <label for="loginInput">Username or Email:</label>
+        <input type="text" name="loginInput" required>
         <br>
         <label for="password">Password:</label>
         <input type="password" name="password" required>
@@ -67,14 +74,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     </form>
 
     <h1>Register</h1>
-    <form method="post">
+    <form method="post" action="index.php">
         <label for="username">Username:</label>
         <input type="text" name="username" required>
+        <br>
+        <label for="email">Email:</label>
+        <input type="email" name="email" required>
         <br>
         <label for="password">Password:</label>
         <input type="password" name="password" required>
         <br>
         <button type="submit" name="register">Register</button>
     </form>
+
 </body>
 </html>

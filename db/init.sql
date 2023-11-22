@@ -1,4 +1,3 @@
--- Tworzenie tabeli użytkowników
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(255) UNIQUE NOT NULL,
@@ -9,7 +8,6 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 
--- Tworzenie tabeli sesji (opcjonalne)
 CREATE TABLE IF NOT EXISTS sessions (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,

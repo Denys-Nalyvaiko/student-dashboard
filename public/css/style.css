@@ -1,0 +1,45 @@
+body {
+  font-family: Eras Demi ITC;
+}
+
+button {
+  font-family: transparent;
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.login-input {
+  padding: 24px;
+  text-align: center;
+  color: rgba(37, 37, 37, 0.8);
+  font-size: 22px;
+  letter-spacing: 2.6px;
+  border-radius: 20px;
+  background: #e2e2e2;
+  box-shadow: 0px 4px 4px 0px rgba(37, 37, 37, 0.84) inset,
+    0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  min-width: 432px;
+}
+
+.login-btn {
+  padding: 26px;
+  color: #f9f9f9;
+  font-size: 22px;
+  border-radius: 20px;
+  background: #252525;
+  box-shadow: 2px 4px 8px 0px rgba(0, 0, 0, 0.25);
+  min-width: 432px;
+}

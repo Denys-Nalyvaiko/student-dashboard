@@ -3,16 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="public/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="public/css/style.css">
     <title>Student Dashboard</title>
   </head>
   <body>
     <div class="container">
       <div class="logo">
-        <img src="" alt="Logo" />
+        <!-- <img src="" alt="Logo" /> -->
       </div>
       <div class="login-container">
-        <form action="login" method="POST" class="login">
+        <form action="login" method="POST" class="login-form">
           <div class="messages">
             <?php 
               if(isset($messages)){
@@ -22,9 +22,9 @@
               }
             ?>
           </div>
-          <input name="email" type="text" placeholder="email.@email.com" />
-          <input name="password" type="password" placeholder="password" />
-          <button type=submit>LOGIN</button>
+          <input name="email" type="text" placeholder="email.@email.com" class="login-input"/>
+          <input name="password" type="password" placeholder="password" class="login-input"/>
+          <button type=submit class="login-btn">LOGIN</button>
         </form>
       </div>
   </div>

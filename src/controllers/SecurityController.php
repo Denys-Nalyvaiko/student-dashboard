@@ -1,7 +1,7 @@
 <?php
 
 require_once 'AppController.php';
-require_once __DIR__.'/../models/User.php';
+require_once __DIR__ .'/../models/User.php';
 
 class SecurityController extends AppController{
 
@@ -9,18 +9,18 @@ class SecurityController extends AppController{
     $user = new User('ajax@gmail.com', 'admin', 'Ajax', 'Know');
 
     if(!$this->isPost()){
-      return $this->login('login');
+      return $this->render('login');
     }
 
     $email = $_POST["email"];
     $password = $_POST["password"];
 
     if($user->getEmail() !== $email){
-      return $this->render('login', ['message' => ['User with this email not exist!']]);
+      return $this->render('login', ['messages' => ['User with this email not exist!']]);
     }
 
     if($user->getPassword() !== $password){
-      return $this->render('login', ['message' => ['Wrong password!']]);
+      return $this->render('login', ['messages' => ['Wrong password!']]);
     }
 
     // return $this->render('projects'); 

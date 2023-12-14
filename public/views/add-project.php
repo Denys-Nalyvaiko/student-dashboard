@@ -43,25 +43,23 @@
                 </div>
             </header>
             <section class="project-form">
-                <div id="project-1">
-                    <!-- <img src="public/img/uploads/project_smile.jpg"> -->
-                    <div>
-                        <h2>UPLOAD</h2>
-                        <form action="addProject" method="POST" ENCTYPE="multipart/form-data" class="upload-project-form">
-                          <?php 
+                <h1>UPLOAD</h1>
+                <form action="addProject" method="POST" ENCTYPE="multipart/form-data">
+                    <div class="messages">
+                        <?php
                             if(isset($messages)){
-                              foreach($messages as $message){
-                                echo $message;
-                              }
+                                foreach($messages as $message) {
+                                    echo $message;
+                                }
                             }
-                          ?>
-                          <input type="text" name="title" placeholder="title">
-                          <textarea name="description" id="description" cols="30" rows="5" placeholder="description"></textarea>
-                          <input type="file" name="file">
-                          <button type="submit">Send</button>
-                        </form>
+                        ?>
                     </div>
-                </div>
+                    <input name="title" type="text" placeholder="title">
+                    <textarea name="description" rows=5 placeholder="description"></textarea>
+
+                    <input type="file" name="file"/><br/>
+                    <button type="submit">send</button>
+                </form>
             </section>
         </main>
     </div>

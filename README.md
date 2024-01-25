@@ -58,3 +58,7 @@ Welcome contributions to improve this student dashboard. If you'd like to contri
 2. Create a new branch for your feature or bug fix.
 3. Make your changes and test them thorougly.
 4. Submit a pull request, describing your changes and providing a detailed explanation of the problem you're solving.
+
+## Diagram ERD
+
+![diagram ERD](./database.pgerd.png)
